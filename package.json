@@ -1,0 +1,23 @@
+{
+  "name": "didactic-redux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickarora/didactic-redux.git"
+  },
+  "keywords": [],
+  "author": "Nick Arora",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nickarora/didactic-redux/issues"
+  },
+  "homepage": "https://github.com/nickarora/didactic-redux#readme",
+  "devDependencies": {
+    "webpack": "^1.13.0"
+  }
+}
