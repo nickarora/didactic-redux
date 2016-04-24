@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
+    "start": "webpack-dev-server",
     "lint": "eslint . --ext .js --ext .jsx --cache || true",
     "test": "mocha --opts ./test/mocha.opts test/tests.js"
   },
@@ -48,6 +49,7 @@
     "react-addons-test-utils": "^15.0.1",
     "sinon": "^1.17.3",
     "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1",
     "webpack-merge": "^0.12.0"
   },
   "dependencies": {

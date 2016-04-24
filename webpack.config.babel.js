@@ -30,11 +30,29 @@ const common = {
         include: PATHS.app,
       },
     ],
-    loaders: [],
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel?cacheDirectory'],
+        include: PATHS.app,
+      },
+    ],
   },
 }
 
-const startConfig = {}
+const startConfig = {
+  devtool: 'eval-source-map',
+  devServer: {
+    contentBase: PATHS.build,
+    historyApiFallback: true,
+    hot: false,
+    inline: true,
+    progress: true,
+    stats: 'errors-only',
+    host: process.env.HOST,
+    port: process.env.PORT,
+  },
+}
 
 const buildConfig = {}
 
