@@ -1,12 +1,12 @@
 {
   "name": "didactic-redux",
   "version": "1.0.0",
-  "description": "",
+  "description": "Didactic Redux",
   "main": "index.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
     "lint": "eslint . --ext .js --ext .jsx --cache || true",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --opts ./test/mocha.opts test/tests.js"
   },
   "repository": {
     "type": "git",
@@ -33,12 +33,20 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
     "babel-register": "^6.7.2",
+    "chai": "^3.5.0",
+    "chai-enzyme": "^0.4.2",
+    "cheerio": "^0.20.0",
+    "enzyme": "^2.2.0",
     "eslint": "^2.8.0",
     "eslint-config-airbnb": "^8.0.0",
     "eslint-loader": "^1.3.0",
     "eslint-plugin-import": "^1.5.0",
     "eslint-plugin-jsx-a11y": "^1.0.2",
     "eslint-plugin-react": "^5.0.1",
+    "jsdom": "^8.4.0",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "^15.0.1",
+    "sinon": "^1.17.3",
     "webpack": "^1.13.0",
     "webpack-merge": "^0.12.0"
   },
