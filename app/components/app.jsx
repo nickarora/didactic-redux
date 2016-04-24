@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 import { Grid } from 'react-bootstrap'
 
 import Header from './header.jsx'
 
-const App = () => <div>
+const App = ({ children }) => <div>
   <Header />
-  <Grid><p>Welcome to the Zapp!</p></Grid>
+  <Grid>{children}</Grid>
 </div>
+
+App.propTypes = {
+  children: PropTypes.node.isRequired,
+}
 
 export default App
