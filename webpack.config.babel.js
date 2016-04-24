@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import path from 'path'
 import merge from 'webpack-merge'
+import stylelint from 'stylelint'
 
 const TARGET = process.env.npm_lifecycle_event
 
@@ -26,6 +27,11 @@ const common = {
   module: {
     preLoaders: [
       {
+        test: /\.css$/,
+        loaders: ['postcss'],
+        include: PATHS.app,
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['eslint'],
         include: PATHS.app,
@@ -33,12 +39,24 @@ const common = {
     ],
     loaders: [
       {
+        test: /\.css$/,
+        loaders: ['style', 'css', 'myth'],
+        include: PATHS.app,
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['babel?cacheDirectory'],
         include: PATHS.app,
       },
     ],
   },
+  postcss: () => [
+    stylelint({
+      rules: {
+        'color-hex-case': 'lower',
+      },
+    }),
+  ],
 }
 
 const startConfig = {
@@ -54,7 +72,7 @@ const startConfig = {
     port: process.env.PORT,
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
 }
 
