@@ -1,6 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
-const merge = require('webpack-merge')
+import path from 'path'
+import merge from 'webpack-merge'
 
 const TARGET = process.env.npm_lifecycle_event
 
@@ -24,8 +23,12 @@ const common = {
   }
 }
 
-const config = (TARGET === 'start' || !TARGET)
-  ? merge(common, {})
-  : merge(common, {})
+const startConfig = {}
 
-module.exports = config
+const buildConfig = {}
+
+const config = (TARGET === 'start' || !TARGET)
+  ? merge(common, startConfig)
+  : merge(common, buildConfig)
+
+export default config
