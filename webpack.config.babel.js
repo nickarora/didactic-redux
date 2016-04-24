@@ -23,7 +23,12 @@ const common = {
     path: PATHS.build,
     filename: 'app.js',
   },
-  externals: {},
+  externals: {
+    jsdom: 'window',
+    'react/lib/ReactContext': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/addons': true,
+  },
   module: {
     preLoaders: [
       {
