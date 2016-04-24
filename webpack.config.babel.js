@@ -1,3 +1,4 @@
+import webpack from 'webpack'
 import path from 'path'
 import merge from 'webpack-merge'
 
@@ -45,13 +46,16 @@ const startConfig = {
   devServer: {
     contentBase: PATHS.build,
     historyApiFallback: true,
-    hot: false,
+    hot: true,
     inline: true,
     progress: true,
     stats: 'errors-only',
     host: process.env.HOST,
     port: process.env.PORT,
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
 }
 
 const buildConfig = {}
