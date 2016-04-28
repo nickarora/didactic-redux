@@ -5,6 +5,10 @@ import chai, { expect } from 'chai'
 import chaiEnzyme from 'chai-enzyme'
 // import sinon from 'sinon'
 
+import { createStore } from 'redux'
+
+import reducer from '../app/reducer.js'
+
 chai.use(chaiEnzyme())
 
 import { shallow } from 'enzyme'
@@ -17,5 +21,29 @@ describe('<App/>', () => {
     const wrapper = shallow(<App><p /></App>)
 
     expect(wrapper).to.contain(<Header />)
+  })
+})
+
+describe('reducer', () => {
+  it('increments the count when an INCREMENT action is dispatched', () => {
+    const store = createStore(reducer)
+    const action = { type: 'INCREMENT' }
+
+    store.dispatch(action)
+    store.dispatch(action)
+    store.dispatch(action)
+
+    expect(store.getState().count).to.equal(3)
+  })
+
+  it('increments the count when an DECREMENT action is dispatched', () => {
+    const store = createStore(reducer)
+    const action = { type: 'DECREMENT' }
+
+    store.dispatch(action)
+    store.dispatch(action)
+    store.dispatch(action)
+
+    expect(store.getState().count).to.equal(-3)
   })
 })
