@@ -1,26 +1,13 @@
-import { createDevTools } from 'redux-devtools'
-import LogMonitor from 'redux-devtools-log-monitor'
-import DockMonitor from 'redux-devtools-dock-monitor'
-
 import React from 'react'
+import { AppContainer } from 'react-hot-loader'
 import { render } from 'react-dom'
-import { browserHistory, IndexRoute, Route, Router } from 'react-router'
+import { browserHistory } from 'react-router'
 import { combineReducers, createStore } from 'redux'
 import { routerReducer, syncHistoryWithStore } from 'react-router-redux'
-import { Provider } from 'react-redux'
 
-import './main.css'
-import App from './components/app.jsx'
-import Home from './components/home.jsx'
-import About from './components/about.jsx'
-
+import Root from './components/root.jsx'
+import DevTools from './components/devtools.jsx'
 import reducer from './reducer.js'
-
-const DevTools = createDevTools(
-  <DockMonitor toggleVisibilityKey='ctrl-h' changePositionKey='ctrl-q'>
-    <LogMonitor theme='tomorrow' preserveScrollTop={false} />
-  </DockMonitor>
-)
 
 const reducers = combineReducers({
   reducer,
@@ -33,19 +20,14 @@ const store = createStore(
 )
 
 const div = document.createElement('div')
-
 document.body.appendChild(div)
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-render(<Provider store={store}>
-  <div>
-    <Router history={history}>
-      <Route path='/' component={App}>
-        <IndexRoute component={Home} />
-        <Route path='about' component={About} />
-      </Route>
-    </Router>
-    <DevTools />
-  </div>
-</Provider>, div)
+render(<AppContainer component={Root} props={{ store, history }} />, div)
+
+if (module.hot) {
+  module.hot.accept('./components/root.jsx', () => {
+    render(<AppContainer component={require('./components/root.jsx').default} props={{ store, history }} />, div) // eslint-disable-line global-require, max-len
+  })
+}

@@ -65,6 +65,12 @@ const common = {
 }
 
 const startConfig = {
+  entry: {
+    app: [
+      'react-hot-loader/patch',
+      PATHS.app,
+    ],
+  },
   devtool: 'eval-source-map',
   devServer: {
     contentBase: PATHS.build,
@@ -76,6 +82,13 @@ const startConfig = {
     host: process.env.HOST,
     port: process.env.PORT,
   },
+  loaders: [
+    {
+      test: /\.jsx?$/,
+      loaders: ['react-hot-loader/webpack'],
+      include: PATHS.app,
+    },
+  ],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
@@ -84,7 +97,7 @@ const startConfig = {
 const buildConfig = {}
 
 const config = (TARGET === 'start' || !TARGET)
-  ? merge(common, startConfig)
-  : merge(common, buildConfig)
+  ? merge.smart(common, startConfig)
+  : merge.smart(common, buildConfig)
 
 export default config
