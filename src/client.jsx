@@ -5,9 +5,9 @@ import { browserHistory } from 'react-router'
 import { combineReducers, createStore } from 'redux'
 import { routerReducer, syncHistoryWithStore } from 'react-router-redux'
 
-import Root from './components/root.jsx'
-import DevTools from './components/devtools.jsx'
-import reducer from './reducer.js'
+import Routes from './routes'
+import { DevTools } from './components'
+import reducer from './redux/modules/reducer'
 
 const reducers = combineReducers({
   reducer,
@@ -24,10 +24,10 @@ document.body.appendChild(div)
 
 const history = syncHistoryWithStore(browserHistory, store)
 
-render(<AppContainer component={Root} props={{ store, history }} />, div)
+render(<AppContainer component={Routes} props={{ store, history }} />, div)
 
 if (module.hot) {
-  module.hot.accept('./components/root.jsx', () => {
-    render(<AppContainer component={require('./components/root.jsx').default} props={{ store, history }} />, div) // eslint-disable-line global-require, max-len
+  module.hot.accept('./routes.jsx', () => {
+    render(<AppContainer component={require('./routes.jsx').default} props={{ store, history }} />, div) // eslint-disable-line global-require, max-len
   })
 }

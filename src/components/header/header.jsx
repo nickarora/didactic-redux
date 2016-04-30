@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Nav, Navbar, NavItem } from 'react-bootstrap'
 
-import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap'
+import { IndexLinkContainer } from 'react-router-bootstrap'
 
 const Header = () => <Navbar>
   <Navbar.Header>
     <Navbar.Brand>
       <IndexLinkContainer to={{ pathname: '/' }}>
-        <a>Setup</a>
+        <a>Didactic Redux</a>
       </IndexLinkContainer>
     </Navbar.Brand>
   </Navbar.Header>
@@ -16,9 +16,6 @@ const Header = () => <Navbar>
     <IndexLinkContainer to={{ pathname: '/' }}>
       <NavItem eventKey={1} href='#'>Home</NavItem>
     </IndexLinkContainer>
-    <LinkContainer to={{ pathname: '/about' }}>
-      <NavItem eventKey={2} href='#'>About</NavItem>
-    </LinkContainer>
   </Nav>
 </Navbar>
 

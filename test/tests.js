@@ -7,14 +7,14 @@ import chaiEnzyme from 'chai-enzyme'
 
 import { createStore } from 'redux'
 
-import reducer from '../app/reducer.js'
+import reducer from '../src/redux/modules/reducer'
 
 chai.use(chaiEnzyme())
 
 import { shallow } from 'enzyme'
 
-import App from '../app/components/app.jsx'
-import Header from '../app/components/header.jsx'
+import { App } from '../src/containers'
+import { Header } from '../src/components'
 
 describe('<App/>', () => {
   it('includes the Header', () => {
