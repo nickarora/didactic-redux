@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Grid } from 'react-bootstrap'
 
-import { Header } from '../../components'
+import { Header } from 'components'
 
 const App = ({ children }) =>
   <div>

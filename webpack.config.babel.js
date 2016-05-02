@@ -10,6 +10,7 @@ process.env.BABEL_ENV = TARGET
 const PATHS = {
   src: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'build'),
+  node_modules: path.join(__dirname, 'node_modules'),
 }
 
 const common = {
@@ -17,6 +18,10 @@ const common = {
     main: path.join(PATHS.src, 'client.jsx'),
   },
   resolve: {
+    root: [
+      PATHS.src,
+      PATHS.node_modules,
+    ],
     extensions: ['', '.js', '.jsx'],
   },
   output: {

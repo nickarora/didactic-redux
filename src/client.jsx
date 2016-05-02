@@ -5,9 +5,9 @@ import { browserHistory } from 'react-router'
 import { combineReducers, createStore } from 'redux'
 import { routerReducer, syncHistoryWithStore } from 'react-router-redux'
 
-import Root from './root'
-import DevTools from './utils/devtools'
-import reducer from './redux/modules/reducer'
+import Root from 'root'
+import { DevTools } from 'utils'
+import reducer from 'redux/modules/reducer'
 
 const reducers = combineReducers({
   reducer,
