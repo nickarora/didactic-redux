@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --config webpack.config.babel.js",
     "lint": "eslint . --ext .js --ext .jsx --cache || true",
     "test": "mocha --opts ./test/mocha.opts test/tests.js"
   },
@@ -24,6 +24,11 @@
       "es2015",
       "stage-1",
       "react"
+    ],
+    "plugins": [
+      [
+        "react-hot-loader/babel"
+      ]
     ]
   },
   "homepage": "https://github.com/nickarora/didactic-redux#readme",
@@ -50,7 +55,7 @@
     "myth-loader": "^1.0.1",
     "postcss-loader": "^0.8.2",
     "react-addons-test-utils": "^15.0.1",
-    "react-hot-loader": "^3.0.0-alpha.13",
+    "react-hot-loader": "^3.0.0-beta.0",
     "redux-devtools": "^3.2.0",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
@@ -66,9 +71,9 @@
     "react-bootstrap": "^0.29.2",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
-    "react-router": "^2.3.0",
-    "react-router-bootstrap": "^0.22.1",
-    "react-router-redux": "^4.0.2",
-    "redux": "^3.5.1"
+    "react-router": "^2.4.0",
+    "react-router-bootstrap": "^0.23.0",
+    "react-router-redux": "^4.0.4",
+    "redux": "^3.5.2"
   }
 }

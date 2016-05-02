@@ -1,28 +1,12 @@
-import React, { PropTypes } from 'react'
-
-import { IndexRoute, Route, Router } from 'react-router'
-import { Provider } from 'react-redux'
-
-import './theme/main.css'
+import React from 'react'
+import { Route, IndexRoute } from 'react-router'
 
 import { App } from './containers'
-import { Home, DevTools } from './components'
+import { Home } from './components'
 
-const Routes = (props) =>
-  <Provider store={props.store}>
-    <div>
-      <Router history={props.history}>
-        <Route path='/' component={App}>
-          <IndexRoute component={Home} />
-        </Route>
-      </Router>
-      <DevTools />
-    </div>
-  </Provider>
+const getRoutes = () =>
+  <Route path='/' component={App}>
+    <IndexRoute component={Home} />
+  </Route>
 
-Routes.propTypes = {
-  store: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-}
-
-export default Routes
+export default getRoutes

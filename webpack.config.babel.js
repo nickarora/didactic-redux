@@ -22,6 +22,7 @@ const common = {
   output: {
     path: PATHS.build,
     filename: 'app.js',
+    publicPath: '/',
   },
   externals: {
     jsdom: 'window',
@@ -50,7 +51,8 @@ const common = {
       },
       {
         test: /\.jsx?$/,
-        loaders: ['babel?cacheDirectory'],
+        loaders: ['babel'],
+        exclude: /node_modules/,
         include: PATHS.src,
       },
     ],
@@ -65,30 +67,23 @@ const common = {
 }
 
 const startConfig = {
+  devtool: 'eval-source-map',
   entry: {
     main: [
       'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
       path.join(PATHS.src, 'client.jsx'),
     ],
   },
-  devtool: 'eval-source-map',
   devServer: {
     contentBase: PATHS.build,
-    historyApiFallback: true,
+    publicPath: '/',
     hot: true,
-    inline: true,
+    historyApiFallback: true,
     progress: true,
     stats: 'errors-only',
-    host: process.env.HOST,
-    port: process.env.PORT,
   },
-  loaders: [
-    {
-      test: /\.jsx?$/,
-      loaders: ['react-hot-loader/webpack'],
-      include: PATHS.src,
-    },
-  ],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
