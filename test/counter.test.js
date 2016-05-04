@@ -1,25 +1,19 @@
-/* globals describe it */
-import React from 'react'
+import { shallow } from 'enzyme'
+import { App } from 'containers'
+import { Header } from 'components'
 
-import chai, { expect } from 'chai'
-import chaiEnzyme from 'chai-enzyme'
-// import sinon from 'sinon'
-
+import reducer from 'reducers/reducer'
 import { createStore } from 'redux'
 
-import reducer from '../src/reducers'
-
-chai.use(chaiEnzyme())
-
-import { shallow } from 'enzyme'
-
-import { App } from '../src/containers'
-import { Header } from '../src/components'
+describe('A basic test', () => {
+  it('should pass when everything is okay', () => {
+    expect(true).to.be.true
+  })
+})
 
 describe('<App/>', () => {
   it('includes the Header', () => {
     const wrapper = shallow(<App><p /></App>)
-
     expect(wrapper).to.contain(<Header />)
   })
 })

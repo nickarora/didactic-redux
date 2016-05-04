@@ -8,32 +8,30 @@ const TARGET = process.env.npm_lifecycle_event
 process.env.BABEL_ENV = TARGET
 
 const PATHS = {
-  src: path.join(__dirname, 'src'),
   build: path.join(__dirname, 'build'),
   node_modules: path.join(__dirname, 'node_modules'),
+  src: path.join(__dirname, 'src'),
+  test: path.join(__dirname, 'test'),
 }
 
-const common = {
+const sources = {
   entry: {
     main: path.join(PATHS.src, 'client.jsx'),
-  },
-  resolve: {
-    root: [
-      PATHS.src,
-      PATHS.node_modules,
-    ],
-    extensions: ['', '.js', '.jsx'],
   },
   output: {
     path: PATHS.build,
     filename: 'app.js',
     publicPath: '/',
   },
-  externals: {
-    jsdom: 'window',
-    'react/lib/ReactContext': 'window',
-    'react/lib/ExecutionEnvironment': true,
-    'react/addons': true,
+}
+
+const common = {
+  resolve: {
+    root: [
+      PATHS.src,
+      PATHS.node_modules,
+    ],
+    extensions: ['', '.js', '.jsx', '.json'],
   },
   module: {
     preLoaders: [
@@ -45,7 +43,7 @@ const common = {
       {
         test: /\.jsx?$/,
         loaders: ['eslint'],
-        include: PATHS.src,
+        include: [PATHS.src, PATHS.test],
       },
     ],
     loaders: [
@@ -57,8 +55,11 @@ const common = {
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
-        exclude: /node_modules/,
-        include: PATHS.src,
+        include: [PATHS.src, PATHS.test],
+      },
+      {
+        test: /\.json/,
+        loaders: ['json'],
       },
     ],
   },
@@ -71,8 +72,8 @@ const common = {
   ],
 }
 
-const startConfig = {
-  devtool: 'eval-source-map',
+const start = {
+  devtool: 'cheap-module-source-map',
   entry: {
     main: [
       'react-hot-loader/patch',
@@ -94,10 +95,26 @@ const startConfig = {
   ],
 }
 
-const buildConfig = {}
+const build = {}
 
-const config = (TARGET === 'start' || !TARGET)
-  ? merge.smart(common, startConfig)
-  : merge.smart(common, buildConfig)
+const test = {
+  externals: {
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  },
+}
 
-export default config
+const selectConfig = (target) => {
+  switch (target) {
+    case 'build':
+      return merge.smart(sources, common, build)
+    case 'test':
+      return merge.smart(common, test)
+    case 'start':
+    default:
+      return merge.smart(sources, common, start)
+  }
+}
+
+export default selectConfig(TARGET)
