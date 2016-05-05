@@ -1,0 +1,12 @@
+import { cards } from '../../db.json'
+
+const initialState = cards
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
+export default reducer

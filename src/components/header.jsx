@@ -16,8 +16,11 @@ const Header = () => <Navbar>
     <IndexLinkContainer to={{ pathname: '/' }}>
       <NavItem eventKey={1} href='#'>Home</NavItem>
     </IndexLinkContainer>
+    <IndexLinkContainer to={{ pathname: '/topics' }}>
+      <NavItem eventKey={2} href='#'>Topics</NavItem>
+    </IndexLinkContainer>
     <IndexLinkContainer to={{ pathname: '/counter' }}>
-      <NavItem eventKey={2} href='#'>Counter</NavItem>
+      <NavItem eventKey={3} href='#'>Counter</NavItem>
     </IndexLinkContainer>
   </Nav>
 </Navbar>
