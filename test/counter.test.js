@@ -1,43 +1,77 @@
 import { shallow } from 'enzyme'
-import { App } from 'containers'
-import { Header } from 'components'
+import { PureCounter as Counter } from 'containers'
+import { Button } from 'react-bootstrap'
 
-import reducer from 'reducers/reducer'
-import { createStore } from 'redux'
+import * as actions from 'actions/counter'
+import * as types from 'constants'
 
-describe('A basic test', () => {
-  it('should pass when everything is okay', () => {
-    expect(true).to.be.true
+import reducer from 'reducers/counter'
+
+// COMPONENT
+
+const setup = () => {
+  const counter = 0
+
+  const actionsStub = {
+    increment: sinon.stub(),
+    decrement: sinon.stub(),
+  }
+
+  const component = shallow(
+    <Counter counter={counter} actions={actionsStub} />
+  )
+
+  return {
+    component,
+    header: component.find('h1'),
+    buttons: component.find(Button),
+  }
+}
+
+describe('<Counter />', () => {
+  it('should render the current count', () => {
+    const { header } = setup()
+    expect(header.text()).to.contain('Count: 0')
+  })
+
+  it('should render increment and decrement buttons', () => {
+    const { buttons } = setup()
+    expect(buttons.length).to.equal(2)
   })
 })
 
-describe('<App/>', () => {
-  it('includes the Header', () => {
-    const wrapper = shallow(<App><p /></App>)
-    expect(wrapper).to.contain(<Header />)
+// ACTIONS
+
+describe('Counter Actions', () => {
+  it('should create an action to increment the counter', () => {
+    const expectedAction = {
+      type: types.INCREMENT_COUNTER,
+    }
+
+    expect(actions.increment()).to.eql(expectedAction)
+  })
+
+  it('should create an action to decrement the counter', () => {
+    const expectedAction = {
+      type: types.DECREMENT_COUNTER,
+    }
+
+    expect(actions.decrement()).to.eql(expectedAction)
   })
 })
 
-describe('reducer', () => {
-  it('increments the count when an INCREMENT action is dispatched', () => {
-    const store = createStore(reducer)
-    const action = { type: 'INCREMENT' }
+// REDUCER
 
-    store.dispatch(action)
-    store.dispatch(action)
-    store.dispatch(action)
-
-    expect(store.getState().count).to.equal(3)
+describe('Counter Reducer', () => {
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).to.equal(0)
   })
 
-  it('increments the count when an DECREMENT action is dispatched', () => {
-    const store = createStore(reducer)
-    const action = { type: 'DECREMENT' }
+  it('should handle INCREMENT_COUNTER', () => {
+    expect(reducer(10, { type: types.INCREMENT_COUNTER })).to.equal(11)
+  })
 
-    store.dispatch(action)
-    store.dispatch(action)
-    store.dispatch(action)
-
-    expect(store.getState().count).to.equal(-3)
+  it('should handle DECREMENT_COUNTER', () => {
+    expect(reducer(10, { type: types.DECREMENT_COUNTER })).to.equal(9)
   })
 })

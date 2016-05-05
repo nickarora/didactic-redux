@@ -29,3 +29,4 @@ Counter.propTypes = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+export { Counter as PureCounter } // pure component used in tests

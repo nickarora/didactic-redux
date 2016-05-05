@@ -6,5 +6,6 @@
     "React", false,
     "expect": false,
     "chai": false,
+    "sinon": false,
   }
 }
