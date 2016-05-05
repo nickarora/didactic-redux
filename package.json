@@ -7,7 +7,8 @@
     "build": "node_modules/.bin/webpack",
     "start": "webpack-dev-server",
     "lint": "eslint . --ext .js --ext .jsx --cache || true",
-    "test": "karma start"
+    "test": "karma start",
+    "server": "json-server --watch db.json --routes routes.json --port 3005"
   },
   "repository": {
     "type": "git",
@@ -77,6 +78,7 @@
     "webpack-merge": "^0.12.0"
   },
   "dependencies": {
+    "json-server": "^0.8.10",
     "react": "^15.0.1",
     "react-bootstrap": "^0.29.2",
     "react-dom": "^15.0.1",
